@@ -10,6 +10,21 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackDevServerPort = parseInt(process.env.PORT || '3000', 10)
 const production = process.env.NODE_ENV === 'production'
 
+const routes = [
+  {
+    title: 'Home',
+    page: 'index'
+  },
+  {
+    title: 'About',
+    page: 'about'
+  },
+  {
+    title: 'Contact',
+    page: 'contact'
+  }
+]
+
 module.exports = {
   entry: {
     app: [
@@ -151,6 +166,21 @@ module.exports = {
   }
 }
 
+routes.forEach((route) => {
+  module.exports.plugins.push(
+    new HtmlWebpackPlugin({
+      title: route.title,
+      filename: `${route.page}.html`,
+      template: `views/pages/${route.page}.hbs`,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      }
+    })
+  )
+})
+
 let plugins = []
 
 if (production) {
@@ -167,42 +197,6 @@ if (production) {
       }
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'Home',
-      filename: path.resolve(__dirname, 'dist/index.html'),
-      template: 'views/pages/home.hbs',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      },
-      chunksSortMode: 'dependency'
-    }),
-    new HtmlWebpackPlugin({
-      title: 'About',
-      filename: path.resolve(__dirname, 'dist/about.html'),
-      template: 'views/pages/about.hbs',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      },
-      chunksSortMode: 'dependency'
-    }),
-    new HtmlWebpackPlugin({
-      title: 'Contact',
-      filename: path.resolve(__dirname, 'dist/contact.html'),
-      template: 'views/pages/contact.hbs',
-      inject: true,
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        removeAttributeQuotes: true
-      },
-      chunksSortMode: 'dependency'
-    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
@@ -218,27 +212,6 @@ if (production) {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
       chunks: ['vendor']
-    })
-  ]
-} else {
-  plugins = [
-    new HtmlWebpackPlugin({
-      title: 'Home',
-      filename: 'index.html',
-      template: 'views/pages/home.hbs',
-      inject: true
-    }),
-    new HtmlWebpackPlugin({
-      title: 'About',
-      filename: 'about.html',
-      template: 'views/pages/about.hbs',
-      inject: true
-    }),
-    new HtmlWebpackPlugin({
-      title: 'Contact',
-      filename: 'contact.html',
-      template: 'views/pages/contact.hbs',
-      inject: true
     })
   ]
 }
