@@ -168,8 +168,33 @@ if (production) {
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
     new HtmlWebpackPlugin({
+      title: 'Home',
       filename: path.resolve(__dirname, 'dist/index.html'),
-      template: 'index.html',
+      template: 'views/pages/home.hbs',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      },
+      chunksSortMode: 'dependency'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'About',
+      filename: path.resolve(__dirname, 'dist/about.html'),
+      template: 'views/pages/about.hbs',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+      },
+      chunksSortMode: 'dependency'
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Contact',
+      filename: path.resolve(__dirname, 'dist/contact.html'),
+      template: 'views/pages/contact.hbs',
       inject: true,
       minify: {
         removeComments: true,
