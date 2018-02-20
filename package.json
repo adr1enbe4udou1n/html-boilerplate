@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "HTML Frontend boilerplate based on Bootstrap for pure showcase/prototype sites, with Webpack for assets management.",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --open",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --progress --open",
     "build": "rimraf dist && cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "engines": {
