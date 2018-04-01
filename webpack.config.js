@@ -33,7 +33,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: production ? '[name].[chunkhash].js' : '[name].js',
+    filename: production ? 'js/[name].[chunkhash].js' : 'js/[name].js',
     publicPath: '/'
   },
   module: {
@@ -132,7 +132,7 @@ module.exports = {
       Popper: ['popper.js', 'default']
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[chunkhash].css'
+      filename: 'css/[name].[chunkhash].css'
     }),
     new WebpackNotifierPlugin()
   ],
