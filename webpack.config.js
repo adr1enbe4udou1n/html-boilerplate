@@ -3,6 +3,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const WebpackNotifierPlugin = require('webpack-notifier')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -134,6 +135,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[chunkhash].css'
     }),
+    new FriendlyErrorsWebpackPlugin(),
     new WebpackNotifierPlugin()
   ],
   resolve: {
