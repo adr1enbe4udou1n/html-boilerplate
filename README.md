@@ -1,6 +1,6 @@
 # HTML Boilerplate
 
-> Frontend HTML boilerplate based on Bootstrap 4 (beta), Webpack for assets management, and Handlebars as webpack html template engine. Useful for quick interactive mockup development, easily transposable to any Backend Framework.
+> Frontend HTML boilerplate based on Bootstrap 4, Webpack for assets management, and Handlebars as webpack html template engine. Useful for quick interactive mockup development, easily transposable to any Backend Framework.
 
 ## Frontend features
 
