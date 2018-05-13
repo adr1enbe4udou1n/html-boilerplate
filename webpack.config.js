@@ -26,6 +26,24 @@ const routes = [
   }
 ]
 
+let cssLoaders = [
+  production ? MiniCssExtractPlugin.loader : 'vue-style-loader',
+  {
+    loader: 'css-loader',
+    options: {
+      minimize: production,
+      sourceMap: true
+    }
+  },
+  {
+    loader: 'postcss-loader',
+    options: {
+      ident: 'postcss',
+      sourceMap: true
+    }
+  }
+]
+
 module.exports = {
   entry: {
     app: [
@@ -41,22 +59,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: cssLoaders
+      },
+      {
         test: /\.scss$/,
-        use: [
-          production ? MiniCssExtractPlugin.loader : 'style-loader',
+        use: cssLoaders.concat([
           {
-            loader: 'css-loader',
-            options: {
-              minimize: production,
-              sourceMap: true
-            }
-          }, {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              sourceMap: true
-            }
-          }, {
             loader: 'resolve-url-loader'
           }, {
             loader: 'sass-loader',
@@ -65,7 +74,7 @@ module.exports = {
               sourceMap: true
             }
           }
-        ]
+        ])
       },
       {
         test: /\.(js|vue)$/,
