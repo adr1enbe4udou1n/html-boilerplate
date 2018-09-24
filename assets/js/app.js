@@ -3,6 +3,10 @@
  */
 import 'bootstrap'
 
+// Plugins
+import './plugins/bootstrap'
+import './plugins/fontawesome'
+
 /**
  * Axios loading
  */
@@ -13,9 +17,6 @@ import axios from 'axios'
  */
 import Vue from 'vue'
 
-import 'babel-polyfill'
-import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm'
-
 /**
  * Frontend plugins loading
  */
@@ -23,8 +24,6 @@ import 'slick-carousel'
 import swal from 'sweetalert2'
 
 window.axios = axios
-
-Vue.use(BootstrapVue)
 
 new Vue().$mount('#app');
 

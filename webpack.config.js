@@ -26,6 +26,14 @@ const routes = [
   }
 ]
 
+let postcssPlugins = [
+  require('autoprefixer')()
+]
+
+if (production) {
+  postcssPlugins.push(require('cssnano')())
+}
+
 let cssLoaders = [
   production ? MiniCssExtractPlugin.loader : 'vue-style-loader',
   {
@@ -39,7 +47,8 @@ let cssLoaders = [
     loader: 'postcss-loader',
     options: {
       ident: 'postcss',
-      sourceMap: true
+      sourceMap: true,
+      plugins: postcssPlugins
     }
   }
 ]
@@ -66,8 +75,6 @@ module.exports = {
         test: /\.scss$/,
         use: cssLoaders.concat([
           {
-            loader: 'resolve-url-loader'
-          }, {
             loader: 'sass-loader',
             options: {
               outputStyle: 'expanded',
@@ -88,7 +95,10 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          presets: ['@babel/preset-env']
+        }
       },
       {
         test: /\.html$/,
@@ -98,24 +108,20 @@ module.exports = {
         test: /\.(png|jpe?g|gif)$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: 'url-loader',
             options: {
-              name: 'images/[name].[ext]?[hash]'
-            }
-          },
-          {
-            loader: 'img-loader',
-            options: {
-              enabled: production
+              name: 'images/[name].[ext]?[hash]',
+              limit: 4096
             }
           }
         ]
       },
       {
         test: /\.(woff2?|ttf|eot|svg|otf)$/,
-        loader: 'file-loader',
+        loader: 'url-loader',
         options: {
-          name: 'fonts/[name].[ext]?[hash]'
+          name: 'fonts/[name].[ext]?[hash]',
+          limit: 4096
         }
       },
       {
@@ -152,6 +158,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.vue', '.json'],
     alias: {
+      'sweetalert2$': 'sweetalert2/dist/sweetalert2.js',
       'vue$': 'vue/dist/vue.esm.js',
       'handlebars': 'handlebars/dist/handlebars.js'
     }
