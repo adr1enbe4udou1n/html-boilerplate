@@ -25,9 +25,8 @@ import swal from 'sweetalert2'
 
 window.axios = axios
 
-new Vue().$mount('#app');
-
-(function ($) {
+new Vue().$mount('#app')
+;(function($) {
   /**
    * Bind all bootstrap tooltips
    */
@@ -38,13 +37,16 @@ new Vue().$mount('#app');
    */
   $('[data-toggle="popover"]').popover()
 
-  $('.slider').not('.slick-initialized').removeAttr('hidden').slick({
-    dots: true,
-    infinite: true,
-    speed: 300,
-    slidesToShow: 3,
-    slidesToScroll: 1
-  })
+  $('.slider')
+    .not('.slick-initialized')
+    .removeAttr('hidden')
+    .slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 3,
+      slidesToScroll: 1
+    })
 
   $('button.sweet').click(() => {
     swal({
